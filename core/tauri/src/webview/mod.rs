@@ -218,7 +218,7 @@ macro_rules! unstable_struct {
 }
 
 unstable_struct!(
-  #[doc = "A builder for a webview."]
+  ///A builder for a webview.
   struct WebviewBuilder<R: Runtime> {
     pub(crate) label: String,
     pub(crate) webview_attributes: WebviewAttributes,
@@ -1266,6 +1266,17 @@ fn main() {
     ))?;
 
     listeners.unlisten_js(id);
+
+    Ok(())
+  }
+
+  /// Unregister all JS event listeners.
+  pub(crate) fn unlisten_all_js(&self) -> crate::Result<()> {
+    let listeners = self.manager().listeners();
+    listeners.unlisten_all_js(self.label());
+    self.eval(&crate::event::unlisten_all_js_script(
+      listeners.listeners_object_name(),
+    ))?;
 
     Ok(())
   }

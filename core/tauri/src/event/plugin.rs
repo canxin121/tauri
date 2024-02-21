@@ -84,6 +84,11 @@ pub fn unlisten<R: Runtime>(
 }
 
 #[command(root = "crate")]
+pub fn unlisten_all<R: Runtime>(webview: Webview<R>) -> Result<()> {
+  webview.unlisten_all_js()
+}
+
+#[command(root = "crate")]
 pub fn emit<R: Runtime>(
   app: AppHandle<R>,
   event: EventName,
@@ -105,6 +110,12 @@ pub fn emit_to<R: Runtime>(
 /// Initializes the event plugin.
 pub(crate) fn init<R: Runtime>() -> TauriPlugin<R> {
   Builder::new("event")
-    .invoke_handler(crate::generate_handler![listen, unlisten, emit, emit_to])
+    .invoke_handler(crate::generate_handler![
+      listen,
+      unlisten,
+      unlisten_all,
+      emit,
+      emit_to
+    ])
     .build()
 }
