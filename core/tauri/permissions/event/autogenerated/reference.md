@@ -32,6 +32,14 @@ Enables the unlisten command without any pre-configured scope.
 
 Denies the unlisten command without any pre-configured scope.
 
+## allow-unlisten-all
+
+Enables the unlisten_all command without any pre-configured scope.
+
+## deny-unlisten-all
+
+Denies the unlisten_all command without any pre-configured scope.
+
 ## default
 
 Default permissions for the plugin.

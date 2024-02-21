@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-License-Identifier: MIT
 
-;(function () {
+; (function () {
   function uid() {
     return window.crypto.getRandomValues(new Uint32Array(1))[0]
   }
@@ -61,14 +61,14 @@
           resolve(r)
           delete window[`_${error}`]
         },
-        true)
+          true)
         const error = window.__TAURI_INTERNALS__.transformCallback(function (
           e
         ) {
           reject(e)
           delete window[`_${callback}`]
         },
-        true)
+          true)
 
         const action = () => {
           window.window.__TAURI_INTERNALS__.ipc({
@@ -91,4 +91,11 @@
       })
     }
   })
+  
+  // Claer residual listeners when reload.
+  window.__TAURI_INTERNALS__.invoke('plugin:event|unlisten_all')
+    .then()
+    .catch((e) => {
+      console.error("Failed to clear residual listeners: " + e)
+    })
 })()

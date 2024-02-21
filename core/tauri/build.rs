@@ -36,6 +36,7 @@ const PLUGINS: &[(&str, &[(&str, bool)])] = &[
     &[
       ("listen", true),
       ("unlisten", true),
+      ("unlisten_all", true),
       ("emit", true),
       ("emit_to", true),
     ],
